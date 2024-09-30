@@ -1,0 +1,310 @@
+/* inicien con : son pseudoelementos, no existen en el html pero las creamos para guardar variables de css llamadas Custom Properties */
+:root {
+  --blanco: #FFFFFF;
+  --oscuro: #212121;
+  --primario: #ffc107;
+  --secundario: #0097A7;
+  --gris: #757575;
+}
+
+html {
+  font-size: 62.5%;
+  box-sizing: border-box;
+  scroll-snap-type: y mandatory;
+}
+
+/* Control snap */
+.servicios, 
+.navegacion-principal,
+.formulario{
+  scroll-snap-align: center;
+  scroll-snap-stop: always;
+}
+
+
+/* 
+junto con border-box y este *, harán que no se sumen los pixeles de los elementos padding + margin +...
+*/
+*,
+*:before,
+*:after {
+  box-sizing: inherit;
+}
+
+body {
+  font-size: 16px;
+  font-family: 'krub', sans-serif;
+  background-image: linear-gradient(to top, #DFE9F3 0%, var(--blanco) 100%);
+  /* Para hacer un difuminado. (hacia la direccion, color principal , al que se va difuminando) */
+}
+
+/*
+  Se usan los estilos de arriba para usar la unidad rem correctamente y se adapte mejor a mas browsers 
+  10px = 1rem
+*/
+
+h1 {
+  font-size: 3.8rem;
+}
+
+h2 {
+  font-size: 2.8rem;
+}
+
+h3 {
+  font-size: 1.8rem;
+}
+
+h1,
+h2,
+h3 {
+  text-align: center;
+}
+
+.titulo span {
+  font-size: 2rem;
+}
+
+.contenedor {
+  max-width: 120rem;
+  margin: 0 auto;
+}
+
+.boton {
+  background-color: var(--secundario);
+  color: var(--blanco);
+  padding: 1rem 3rem;
+  margin-top: 3rem;
+  font-size: 2rem;
+  text-decoration: none;
+  text-transform: uppercase;
+  font-weight: bold;
+  border-radius: .5rem;
+  width: 90%;
+  text-align: center;
+  border: none;
+}
+
+.boton:hover {
+  cursor: pointer;
+}
+
+.sombra {
+  -webkit-box-shadow: 0px 5px 15px 0px rgba(7, 7, 7, 0.54);
+  -moz-box-shadow: 0px 5px 15px 0px rgba(7, 7, 7, 0.54);
+  box-shadow: 0px 5px 15px 0px rgba(7, 7, 7, 0.54);
+  background-color: var(--blanco);
+  padding: 2rem;
+  border-radius: 1rem;
+}
+
+@media (min-width:768px) {
+  .boton {
+    width: auto;
+  }
+}
+
+/* UTILIDADES */
+
+.w-sm-100 {
+  width: 100%;
+}
+
+@media (min-width:768px) {
+  .w-sm-100 {
+    width: auto;
+  }
+}
+
+.flex {
+  display: flex;
+}
+
+.alinear-derecha {
+  justify-content: flex-end;
+}
+
+.nav-bg {
+  background-color: var(--secundario);
+}
+
+.navegacion-principal {
+  display: flex;
+  flex-direction: column;
+}
+
+/*
+480px - telefono
+768px - tablet
+1140px/1400px - laptop/pc
+*/
+
+
+@media (min-width:768px) {
+  .navegacion-principal {
+    flex-direction: row;
+    justify-content: space-between;
+  }
+}
+
+.navegacion-principal a {
+  display: block;
+  text-align: center;
+  padding: 1rem;
+  color: var(--blanco);
+  text-decoration: none;
+  font-size: 2rem;
+  font-weight: bold;
+}
+
+.navegacion-principal a:hover {
+  background-color: var(--primario);
+  color: var(--oscuro);
+}
+
+.hero {
+  background-image: url(../img/hero.jpg);
+  background-repeat: no-repeat;
+  background-size: cover;
+  height: 450px;
+  position: relative;
+  margin-bottom: 2rem;
+}
+
+.contenido-hero {
+  position: absolute;
+  background-color: rgba(0, 0, 0, .7);
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.contenido-hero h2,
+.contenido-hero p {
+  /*Aplicar el mismo estilo a dos elementos diferentes, ayuda a ahorrar lineas*/
+  color: var(--blanco);
+}
+
+.ubicacion {
+  display: flex;
+  align-items: flex-end;
+}
+
+
+/* Servicios */
+
+@media (min-width: 768px) {
+  .servicios {
+    display: grid;
+    /* Con grid se puede modificar tanto en columnas o en filas, a diferencia de flex */
+
+    grid-template-columns: repeat(3, 1fr);
+    /* 1fr = 1 fraccion == dividir el espacio en 3 fracciones iguales*/
+
+    column-gap: 1rem;
+    /* La separacion entre columnas */
+  }
+}
+
+.servicio {
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.servicio h3 {
+  color: var(--secundario);
+  font-weight: normal;
+}
+
+.servicio p {
+  line-height: 2;
+  text-align: center;
+}
+
+.servicio .iconos {
+  height: 15rem;
+  width: 15rem;
+  background-color: var(--primario);
+  border-radius: 50%;
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+}
+
+/* Contacto */
+
+.formulario {
+  background-color: var(--gris);
+  width: min(60rem, 100%);
+  /* usa el valor mas pequeño de los dos pasados. Ahorra @media querys */
+  margin: 0 auto;
+  /* No usamos "justify-content:flex" debido a que el section padre no tiene un display flex, ademas que es mejor para formularios usar margin: 0 auto, pues tiene un display: block */
+  padding: 2rem;
+  border-radius: 1rem;
+
+}
+
+.formulario fieldset {
+  border: none;
+}
+
+.formulario legend {
+  text-align: center;
+  font-size: 1.8rem;
+  text-transform: uppercase;
+  font-weight: 700;
+  margin-bottom: 2rem;
+  color: var(--primario);
+}
+
+@media (min-width:768px) {
+  .contenedor-campos {
+    display: grid;
+    /* Definimos las areas de las columnas */
+    grid-template-columns: repeat(2, 1fr);
+    /* Definimos el espacio */
+    column-gap: 1rem;
+    /* Defininmos las areas de las filas */
+    grid-template-rows: auto auto 20rem;
+  }
+
+  .campo:nth-child(3),
+  .campo:nth-child(4)
+   {
+    /*selecciona el 3ro de los que tengan la misma clase "campo", en este caso es el input correo*/
+    /* Posicionar un elmento */
+    grid-column: 1/3; /* Toma los numeros como lineas delimitadoras, usa firexos dev para verlas */
+  }
+}
+
+.campo {
+  margin-bottom: 1rem;
+}
+
+.campo textarea {
+  height: 20rem;
+}
+
+.campo label {
+  color: var(--blanco);
+  font-weight: bold;
+  margin-bottom: .5rem;
+  display: block;
+}
+
+.input-text {
+  width: 100%;
+  border: none;
+  padding: 1.5rem;
+  border-radius: .5rem;
+
+}
+
+.footer{
+  text-align: center;
+}
